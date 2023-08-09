@@ -24,6 +24,9 @@ function reducer(state, { type, payload }) {
       if (payload.digit === "0" && state.currentOperand === "0") {
         return state;
       }
+      if (payload.digit === "." && state.currentOperand == null) {
+        return state;
+      }
       if (payload.digit === "." && state.currentOperand.includes(".")) {
         return state;
       }
@@ -132,7 +135,7 @@ function formatOperand(operand) {
   if (operand == null) return;
   const [integer, decimal] = operand.split(".");
   if (decimal == null) return INTEGER_FORMATTER.format(integer);
-  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
 function App() {
